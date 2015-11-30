@@ -7,7 +7,8 @@
         (sqrt-iter (improve guess x) x)))
 
 (define (good-enough? guess x)
-    (< (abs (- (square guess) x)) 0.00000001))
+    (< (abs (- (improve guess x) guess))
+       (* 1e-3 guess)))
 
 (define (square x)
     (* x x))
@@ -18,5 +19,4 @@
 (define (average x y)
     (/ (+ x y) 2))
 
-(display (sqrt 1e20))
-(display (sqrt (+ 1e10 1e20)))
+(display (sqrt 8888888888888))
