@@ -5,11 +5,27 @@
   )
 )
 
+(define (accumulate-iter combiner null-value term a next b)
+  (define (iter a product)
+    (if (> a b)
+        product
+        (iter (next a) (combiner (term a) product)))
+  )
+  (iter a null-value)
+)
+
 (define (sum term a next b)
   (accumulate + 0 term a next b))
 (define (product term a next b)
   (accumulate * 1 term a next b))
 
+(define (sum-iter term a next b)
+  (accumulate-iter + 0 term a next b)
+)
+
+(define (product-iter term a next b)
+  (accumulate-iter * 1 term a next b)
+)
 
 (define (as-is x) x)
 (define (inc n) (+ n 1))
