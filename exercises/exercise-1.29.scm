@@ -19,17 +19,11 @@
 
 
 (define (simpson-integral f a b n)
-  (define h (/ (- b a) n))
-  (* (sum (lambda (k)
-         (cond ((= k 0) (f (+ a (* k h))))
-               ((and (odd? k) (> k 0)) (* 4 (f (+ a (* k h)))))
-               (else (* 2 (f (+ a (* k h)))))
-         )
-       )
-       0
-       inc
-       n
-     )
-     (/ h 3)
-  )
-)
+  (define h (/ n (- b a)))
+  (define (y k) (f (+ a (* k h))))
+  (define (simpson-term k)
+    (lambda (k)
+           (cond ((or (= k n) (= k 0)) (y k))
+                 ((and (odd? k) (> k 0)) (* 4 (y k)))
+                 (else (* 2 (y k))))))
+  (* (/ h 3.0) (sum simpson-term 0 inc n)))
