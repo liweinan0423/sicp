@@ -17,19 +17,13 @@
   (define (pi-term k)
     (/ (* (* 2 k)
           (+ (* 2 k) 2))
-       (square (+ (* 2 k) 1))
-    )
-  )
-  (* (product-procedure pi-term 1 inc n) 4.0)
-)
+               (square (+ (* 2 k) 1))))
+  (* (product-procedure pi-term 1 inc n) 4.0))
 
 ; iterative product
 (define (product-iter term a next b)
   (define (iter a product)
     (if (> a b)
         product
-        (iter (next a) (* product (term a)))
-    )
-  )
-  (iter a 1)
-)
+        (iter (next a) (* product (term a)))))
+  (iter a 1))
