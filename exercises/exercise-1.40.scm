@@ -58,4 +58,11 @@
 (define (sqrt4 x)
   (newtons-method (lambda (y) (- (square y) x))
                   1.0))
-; TODO
+; begin exercise
+(define (cube x) (* x x x))
+(define (cubic a b c)
+  (lambda (x)
+    (+ (cube x)
+       (* a (square x))
+       (* b x)
+       c)))
